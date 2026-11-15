@@ -1,0 +1,2161 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Generatore Calendari Corsi CQC — DM 30/07/2021 & Circ. MIT 31895/2021</title>
+  <style>
+    :root {
+      --primary: #1e3a8a;
+      --primary-light: #2563eb;
+      --primary-bg: #eff6ff;
+      --secondary: #0f766e;
+      --secondary-bg: #f0fdfa;
+      --accent: #d97706;
+      --accent-bg: #fffbeb;
+      --danger: #dc2626;
+      --danger-bg: #fef2f2;
+      --success: #15803d;
+      --success-bg: #f0fdf4;
+      --bg: #f1f5f9;
+      --surface: #ffffff;
+      --border: #cbd5e1;
+      --border-light: #e2e8f0;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --radius: 10px;
+      --shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.07), 0 2px 4px -2px rgba(15, 23, 42, 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding-bottom: 48px;
+    }
+
+    /* Header */
+    header.app-header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+      color: #ffffff;
+      padding: 20px 28px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .header-inner {
+      max-width: 1480px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 16px;
+      letter-spacing: 0.5px;
+    }
+
+    .brand h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .brand p {
+      font-size: 0.82rem;
+      color: #cbd5e1;
+    }
+
+    .header-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 9px 16px;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.15s ease;
+      text-decoration: none;
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-light);
+      color: #ffffff;
+      box-shadow: 0 2px 4px rgba(37, 99, 235, 0.3);
+    }
+    .btn-primary:hover:not(:disabled) {
+      background-color: #1d4ed8;
+    }
+
+    .btn-success {
+      background-color: #16a34a;
+      color: #ffffff;
+    }
+    .btn-success:hover:not(:disabled) {
+      background-color: #15803d;
+    }
+
+    .btn-outline-light {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.3);
+      color: #ffffff;
+    }
+    .btn-outline-light:hover:not(:disabled) {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-outline {
+      background-color: #ffffff;
+      border-color: var(--border);
+      color: var(--text);
+    }
+    .btn-outline:hover:not(:disabled) {
+      background-color: #f8fafc;
+      border-color: #94a3b8;
+    }
+
+    .btn-sm {
+      padding: 5px 10px;
+      font-size: 0.78rem;
+      border-radius: 6px;
+    }
+
+    .btn-danger-ghost {
+      background: transparent;
+      color: var(--danger);
+      padding: 4px 8px;
+      font-size: 0.8rem;
+    }
+    .btn-danger-ghost:hover {
+      background: var(--danger-bg);
+    }
+
+    /* Layout Container */
+    .container {
+      max-width: 1480px;
+      margin: 24px auto 0;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    @media (max-width: 1120px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Cards */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .card-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border-light);
+      background: #f8fafc;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .card-header h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    /* Form Controls */
+    .form-section {
+      margin-bottom: 20px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .form-section:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .section-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .form-group {
+      margin-bottom: 12px;
+    }
+
+    .form-group:last-child {
+      margin-bottom: 0;
+    }
+
+    label {
+      display: block;
+      font-size: 0.84rem;
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: #1e293b;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    input[type="time"],
+    select {
+      width: 100%;
+      padding: 8px 11px;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      font-size: 0.88rem;
+      color: var(--text);
+      background-color: #ffffff;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    input:focus,
+    select:focus {
+      outline: none;
+      border-color: var(--primary-light);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    /* Radio Pills for Indirizzo */
+    .radio-pills {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .radio-pill input {
+      display: none;
+    }
+
+    .radio-pill label {
+      margin: 0;
+      padding: 9px 12px;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      text-align: center;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.85rem;
+      background: #f8fafc;
+      transition: all 0.15s;
+    }
+
+    .radio-pill input:checked + label {
+      background: var(--primary-bg);
+      border-color: var(--primary-light);
+      color: var(--primary);
+      box-shadow: inset 0 0 0 1px var(--primary-light);
+    }
+
+    /* Days Checkboxes */
+    .days-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 5px;
+    }
+
+    .day-check input {
+      display: none;
+    }
+
+    .day-check label {
+      margin: 0;
+      padding: 7px 2px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      text-align: center;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      background: #f8fafc;
+      user-select: none;
+    }
+
+    .day-check input:checked + label {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+    }
+
+    /* Time Slots Builder */
+    .slot-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .slot-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 8px;
+      align-items: center;
+      background: #f8fafc;
+      padding: 8px;
+      border-radius: 7px;
+      border: 1px solid var(--border-light);
+    }
+
+    .slot-row span.slot-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--primary);
+      background: var(--primary-bg);
+      padding: 3px 7px;
+      border-radius: 5px;
+      white-space: nowrap;
+    }
+
+    .preset-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .preset-btn {
+      font-size: 0.74rem;
+      padding: 4px 8px;
+      border-radius: 5px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .preset-btn:hover {
+      border-color: var(--primary-light);
+      color: var(--primary);
+      background: var(--primary-bg);
+    }
+
+    /* Holiday Tags */
+    .holiday-input-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .tags-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      max-height: 92px;
+      overflow-y: auto;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #f1f5f9;
+      border: 1px solid var(--border);
+      padding: 3px 8px;
+      border-radius: 99px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .tag button {
+      border: none;
+      background: none;
+      color: var(--danger);
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 0.85rem;
+      line-height: 1;
+    }
+
+    /* Alerts & Validation Box */
+    .alert {
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      margin-bottom: 16px;
+      border: 1px solid transparent;
+    }
+
+    .alert-danger {
+      background: var(--danger-bg);
+      border-color: #fecaca;
+      color: #991b1b;
+    }
+
+    .alert-warning {
+      background: var(--accent-bg);
+      border-color: #fde68a;
+      color: #92400e;
+    }
+
+    .alert-info {
+      background: var(--primary-bg);
+      border-color: #bfdbfe;
+      color: #1e40af;
+    }
+
+    .alert ul {
+      margin-top: 6px;
+      padding-left: 20px;
+    }
+
+    .alert li {
+      margin-bottom: 3px;
+    }
+
+    /* KPI Strip */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .kpi-card {
+      background: var(--surface);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .kpi-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+
+    .kpi-value {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-top: 4px;
+    }
+
+    .kpi-sub {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* Filter Bar */
+    .table-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 20px;
+      background: #f8fafc;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .filter-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .filter-btn {
+      padding: 5px 12px;
+      border-radius: 99px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+
+    .filter-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+    }
+
+    /* Table */
+    .table-wrapper {
+      overflow-x: auto;
+      max-height: 72vh;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.84rem;
+    }
+
+    thead th {
+      position: sticky;
+      top: 0;
+      background: #f1f5f9;
+      color: #1e293b;
+      font-weight: 700;
+      text-align: left;
+      padding: 11px 12px;
+      border-bottom: 2px solid var(--border);
+      white-space: nowrap;
+      z-index: 10;
+    }
+
+    tbody td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border-light);
+      vertical-align: top;
+    }
+
+    tbody tr:hover {
+      background-color: #f8fafc;
+    }
+
+    tbody tr.new-day-row td {
+      border-top: 2px solid #cbd5e1;
+    }
+
+    tbody tr.practice-row {
+      background-color: #f0fdfa;
+    }
+
+    tbody tr.practice-row:hover {
+      background-color: #ccfbf1;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 5px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .badge-teoria {
+      background: #dbeafe;
+      color: #1e40af;
+    }
+
+    .badge-pratica {
+      background: #ccfbf1;
+      color: #115e59;
+    }
+
+    .badge-durata {
+      background: #f1f5f9;
+      color: #334155;
+      border: 1px solid #cbd5e1;
+    }
+
+    .prog-hours {
+      font-weight: 700;
+      color: var(--primary);
+      white-space: nowrap;
+    }
+
+    .norm-rules-box {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      background: #f8fafc;
+      border: 1px solid var(--border-light);
+      border-radius: 7px;
+      padding: 10px 12px;
+      margin-top: 10px;
+    }
+
+    .norm-rules-box strong {
+      color: #1e293b;
+    }
+
+    /* Print Header (Hidden on screen) */
+    .print-only-header {
+      display: none;
+    }
+
+    /* Print Styles (A4 Clean Layout) */
+    @media print {
+      @page {
+        size: A4 landscape;
+        margin: 12mm;
+      }
+
+      body {
+        background: #ffffff;
+        padding: 0;
+        font-size: 9pt;
+      }
+
+      header.app-header,
+      .config-column,
+      .table-toolbar,
+      .no-print {
+        display: none !important;
+      }
+
+      .container {
+        display: block;
+        margin: 0;
+        padding: 0;
+        max-width: 100%;
+      }
+
+      .print-only-header {
+        display: block;
+        margin-bottom: 14px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #0f172a;
+      }
+
+      .print-only-header h1 {
+        font-size: 14pt;
+        color: #0f172a;
+        margin-bottom: 4px;
+      }
+
+      .print-meta-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 6px 16px;
+        font-size: 8.5pt;
+        margin-top: 8px;
+      }
+
+      .kpi-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+        margin-bottom: 12px;
+      }
+
+      .kpi-card {
+        box-shadow: none;
+        border: 1px solid #94a3b8;
+        padding: 8px 10px;
+      }
+
+      .kpi-value {
+        font-size: 11pt;
+      }
+
+      .card {
+        box-shadow: none;
+        border: none;
+      }
+
+      .table-wrapper {
+        max-height: none;
+        overflow: visible;
+      }
+
+      table {
+        font-size: 8pt;
+      }
+
+      thead {
+        display: table-header-group;
+      }
+
+      thead th {
+        position: static;
+        background: #e2e8f0 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        padding: 6px 8px;
+      }
+
+      tbody td {
+        padding: 5px 8px;
+        border-bottom: 1px solid #cbd5e1;
+      }
+
+      tr {
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="brand">
+        <div class="brand-icon">CQC</div>
+        <div>
+          <h1>Generatore Automatico Calendari Corsi CQC</h1>
+          <p>Conforme al DM 30 luglio 2021 e Circolare MIT prot. 31895 del 15/10/2021</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button type="button" class="btn btn-success" id="btnExportCsv" onclick="exportCSV()">
+          📥 Esporta in CSV (Excel)
+        </button>
+        <button type="button" class="btn btn-outline-light" id="btnPrint" onclick="window.print()">
+          🖨️ Stampa / Salva PDF
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- COLONNA SINISTRA: PANNELLO CONFIGURAZIONE -->
+    <aside class="config-column">
+      <div class="card">
+        <div class="card-header">
+          <h2>⚙️ Configurazione Corso</h2>
+          <button type="button" class="btn btn-primary btn-sm" onclick="generateSchedule()">
+            Aggiorna Calendario
+          </button>
+        </div>
+        <div class="card-body">
+
+          <!-- 1. Tipologia e Indirizzo -->
+          <div class="form-section">
+            <div class="section-title">1. Tipologia e Specializzazione</div>
+            <div class="form-group">
+              <label for="courseType">Tipologia di Corso</label>
+              <select id="courseType" onchange="onCourseTypeChange()">
+                <option value="ord">Qualificazione Iniziale Ordinario (280h: 260h Teoria + 20h Pratica)</option>
+                <option value="acc">Qualificazione Iniziale Accelerato (140h: 130h Teoria + 10h Pratica)</option>
+                <option value="ext_ord">Estensione / Integrazione Ordinario (45h: 40h Teoria Spec. + 5h Pratica Spec.)</option>
+                <option value="ext_acc">Estensione / Integrazione Accelerato (22,5h: 20h Teoria Spec. + 2,5h Pratica Spec.)</option>
+                <option value="ext_ord_only_t">Estensione / Integrazione — Solo Teoria Ordinario (40h)</option>
+                <option value="ext_acc_only_t">Estensione / Integrazione — Solo Teoria Accelerato (20h)</option>
+                <option value="rinnovo">Formazione Periodica / Rinnovo (35h: 5 Moduli da 7h)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Indirizzo / Abilitazione</label>
+              <div class="radio-pills">
+                <div class="radio-pill">
+                  <input type="radio" name="indirizzo" id="indMerci" value="merci" checked onchange="generateSchedule()" />
+                  <label for="indMerci">🚛 Trasporto Cose (Merci)</label>
+                </div>
+                <div class="radio-pill">
+                  <input type="radio" name="indirizzo" id="indPersone" value="persone" onchange="generateSchedule()" />
+                  <label for="indPersone">🚌 Trasporto Persone</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="schoolName">Denominazione Autoscuola / Ente / C.I.A. (per intestazione stampa)</label>
+              <input type="text" id="schoolName" value="Autoscuola / Ente Formazione Autorizzato" placeholder="Es. Autoscuola Centrale S.r.l." />
+            </div>
+          </div>
+
+          <!-- 2. Anagrafica Docenti -->
+          <div class="form-section">
+            <div class="section-title">2. Anagrafica Corpo Docenti (Art. 3 DM 30/07/2021)</div>
+            <div class="form-group">
+              <label for="docTeoria">Insegnante di Teoria <small style="font-weight:400;color:#64748b">(Area Circolazione / Mod. 1-2 Rinnovo)</small></label>
+              <input type="text" id="docTeoria" value="Prof. Marco Rossi (Ins. Teoria)" />
+            </div>
+            <div class="form-group">
+              <label for="docEsperto">Esperto Organizzazione Aziendale <small style="font-weight:400;color:#64748b">(Autotrasporto, Spec. e Mod. 4-5)</small></label>
+              <input type="text" id="docEsperto" value="Dott.ssa Elena Bianchi (Esp. Org. Aziendale)" />
+            </div>
+            <div class="form-group">
+              <label for="docMedico">Medico / Psicologo <small style="font-weight:400;color:#64748b">(Area Medica e Mod. 3 Rinnovo)</small></label>
+              <input type="text" id="docMedico" value="Dott. Luca Verdi (Medico Comp.)" />
+            </div>
+            <div class="form-group" id="groupDocIstruttore">
+              <label for="docIstruttore">Istruttore di Guida <small style="font-weight:400;color:#64748b">(Tutta la Parte Pratica)</small></label>
+              <input type="text" id="docIstruttore" value="Sig. Andrea Neri (Istruttore Guida)" />
+            </div>
+          </div>
+
+          <!-- 3. Regole di Pianificazione -->
+          <div class="form-section">
+            <div class="section-title">3. Regole di Pianificazione e Orari</div>
+            <div class="form-group">
+              <label for="startDate">Data Inizio Corso</label>
+              <input type="date" id="startDate" />
+            </div>
+
+            <div class="form-group">
+              <label>Giorni della Settimana Attivi</label>
+              <div class="days-grid">
+                <div class="day-check"><input type="checkbox" id="day1" value="1" checked /><label for="day1">LUN</label></div>
+                <div class="day-check"><input type="checkbox" id="day2" value="2" checked /><label for="day2">MAR</label></div>
+                <div class="day-check"><input type="checkbox" id="day3" value="3" checked /><label for="day3">MER</label></div>
+                <div class="day-check"><input type="checkbox" id="day4" value="4" checked /><label for="day4">GIO</label></div>
+                <div class="day-check"><input type="checkbox" id="day5" value="5" checked /><label for="day5">VEN</label></div>
+                <div class="day-check"><input type="checkbox" id="day6" value="6" /><label for="day6">SAB</label></div>
+                <div class="day-check"><input type="checkbox" id="day0" value="0" /><label for="day0">DOM</label></div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Fasce Orarie Giornaliere (Lun–Ven)</label>
+              <div class="preset-bar">
+                <button type="button" class="preset-btn" onclick="applyPreset('full7')">Full-Time 7h (09-12 / 14-18)</button>
+                <button type="button" class="preset-btn" onclick="applyPreset('full8')">Full-Time 8h (08:30-12:30 / 14-18)</button>
+                <button type="button" class="preset-btn" onclick="applyPreset('serale3')">Serale 3h (19:00-22:00)</button>
+                <button type="button" class="preset-btn" onclick="applyPreset('mattina4')">Mattina 4h (08:30-12:30)</button>
+              </div>
+              <div id="weekdaySlots" class="slot-list"></div>
+              <button type="button" class="btn btn-outline btn-sm" onclick="addSlot('weekday', '14:00', '17:00')">+ Aggiungi fascia Lun–Ven</button>
+            </div>
+
+            <div class="form-group" id="weekendSlotsContainer" style="display:none; margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--border);">
+              <label>Fasce Orarie Sabato / Domenica <small style="font-weight:400;color:#64748b">(opzionale: se vuoto usa Lun–Ven)</small></label>
+              <div id="weekendSlots" class="slot-list"></div>
+              <button type="button" class="btn btn-outline btn-sm" onclick="addSlot('weekend', '08:30', '13:30')">+ Aggiungi fascia Sab/Dom</button>
+            </div>
+
+            <div class="form-group" style="margin-top: 14px;">
+              <label>Esclusione Date Specifiche (Festività / Chiusure)</label>
+              <div class="holiday-input-row">
+                <input type="date" id="holidayInput" />
+                <button type="button" class="btn btn-outline btn-sm" onclick="addHoliday()">Escludi</button>
+                <button type="button" class="btn btn-outline btn-sm" onclick="loadItalianHolidays()" title="Carica festività nazionali italiane">🇮🇹 Festività</button>
+              </div>
+              <div id="holidayTags" class="tags-container"></div>
+            </div>
+
+            <div class="norm-rules-box">
+              <strong>Vincoli Motorizzazione applicati:</strong><br/>
+              • Teoria: Lun–Ven <code>08:00–22:00</code> | Sab–Dom <code>08:00–18:00</code> (Iniziale) o <code>08:00–15:00</code> (Periodica).<br/>
+              • Pratica: Lun–Ven <code>08:00–22:00</code> | Sab <code>08:00–14:00</code> | Dom vietata.<br/>
+              • Durata: min <code>2h/giorno</code> (1h solo guide individuali), max <code>8h/giorno</code> (<code>7h</code> Periodica).<br/>
+              • Rilevazione presenze: blocchi automatici da <code>2h</code> o <code>3h</code>.
+            </div>
+          </div>
+
+          <button type="button" class="btn btn-primary" style="width: 100%; padding: 11px; font-size: 0.95rem;" onclick="generateSchedule()">
+            🗓️ Genera Calendario CQC
+          </button>
+
+        </div>
+      </div>
+    </aside>
+
+    <!-- COLONNA DESTRA: VALIDAZIONE, KPI E TABELLA -->
+    <section class="output-column">
+
+      <!-- Intestazione solo per stampa A4 -->
+      <div class="print-only-header" id="printHeader">
+        <h1 id="printTitle">CALENDARIO CORSO CQC</h1>
+        <div id="printSubtitle" style="font-size: 9.5pt; color: #334155;"></div>
+        <div class="print-meta-grid" id="printMeta"></div>
+      </div>
+
+      <!-- Box Errori / Avvisi Normativi -->
+      <div id="validationBox"></div>
+
+      <!-- Riepilogo KPI -->
+      <div class="kpi-grid" id="kpiGrid">
+        <div class="kpi-card">
+          <div class="kpi-label">Monte Ore Totale</div>
+          <div class="kpi-value" id="kpiTotalHours">—</div>
+          <div class="kpi-sub" id="kpiHoursBreakdown">Teoria + Pratica</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Giornate di Lezione</div>
+          <div class="kpi-value" id="kpiTotalDays">—</div>
+          <div class="kpi-sub" id="kpiDateRange">Dal — al —</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Blocchi Presenza</div>
+          <div class="kpi-value" id="kpiTotalBlocks">—</div>
+          <div class="kpi-sub">Suddivisione 2h / 3h</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Max Assenze Consentite</div>
+          <div class="kpi-value" id="kpiMaxAbsences">—</div>
+          <div class="kpi-sub" id="kpiAbsencesDetail">Art. 9-10-16 DM 30/07/2021</div>
+        </div>
+      </div>
+
+      <!-- Tabella Calendario -->
+      <div class="card">
+        <div class="table-toolbar">
+          <div class="filter-pills" id="filterPills">
+            <button type="button" class="filter-btn active" data-filter="ALL" onclick="setTableFilter('ALL', this)">Tutti i moduli</button>
+            <button type="button" class="filter-btn" data-filter="TEORIA" onclick="setTableFilter('TEORIA', this)">Solo Teoria</button>
+            <button type="button" class="filter-btn" data-filter="PRATICA" onclick="setTableFilter('PRATICA', this)">Solo Pratica</button>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <label for="teacherFilter" style="margin:0; font-size:0.8rem; color:var(--text-muted);">Docente:</label>
+            <select id="teacherFilter" style="width:auto; padding:5px 10px; font-size:0.8rem;" onchange="renderTable()">
+              <option value="ALL">Tutti i docenti</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="table-wrapper">
+          <table id="scheduleTable">
+            <thead>
+              <tr>
+                <th>Giorno</th>
+                <th>Data</th>
+                <th>Fascia Oraria (Dalle - Alle)</th>
+                <th>Durata Blocco</th>
+                <th>Area / Modulo</th>
+                <th>Punto Programma e Argomento</th>
+                <th>Docente</th>
+                <th>Monte Ore Progressivo</th>
+              </tr>
+            </thead>
+            <tbody id="scheduleBody">
+              <tr>
+                <td colspan="8" style="text-align:center; padding: 36px; color: var(--text-muted);">
+                  Configura i parametri a sinistra e clicca su <strong>Genera Calendario CQC</strong>.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <script>
+    /* =========================================================================
+       1. DATABASE PROGRAMMI CQC (DM 30 LUGLIO 2021 & CIRC. MIT 31895/2021)
+       ========================================================================= */
+    const CQC_DATABASE = {
+      // PARTE TEORICA COMUNE (Ordinario = 220h -> 135 + 50 + 35 | Accelerato = 110h -> 68 + 25 + 17)
+      teoriaComune: [
+        // Area Circolazione Stradale (135h Ord / 68h Acc) - Insegnante di Teoria
+        {
+          phase: 'TEORIA',
+          area: 'Area Circolazione Stradale',
+          code: 'Punto 1.1',
+          topic: 'Conoscenza delle caratteristiche del sistema di trasmissione per usarlo in maniera ottimale',
+          hoursOrd: 20,
+          hoursAcc: 10,
+          teacherRole: 'teoria'
+        },
+        {
+          phase: 'TEORIA',
+          area: 'Area Circolazione Stradale',
+          code: 'Punto 1.2',
+          topic: 'Conoscenza delle caratteristiche tecniche e del funzionamento dei dispositivi di sicurezza per poter controllare il veicolo, minimizzarne l\'usura e prevenirne le anomalie di funzionamento',
+          hoursOrd: 36,
+          hoursAcc: 18,
+          teacherRole: 'teoria'
+        },
+        {
+          phase: 'TEORIA',
+          area: 'Area Circolazione Stradale',
+          code: 'Punto 1.3',
+          topic: 'Capacità di ottimizzare il consumo di carburante',
+          hoursOrd: 20,
+          hoursAcc: 10,
+          teacherRole: 'teoria'
+        },
+        {
+          phase: 'TEORIA',
+          area: 'Area Circolazione Stradale',
+          code: 'Punto 1.3-bis',
+          topic: 'Capacità di prevedere e valutare i rischi del traffico e di adattare la guida di conseguenza',
+          hoursOrd: 30,
+          hoursAcc: 15,
+          teacherRole: 'teoria'
+        },
+        {
+          phase: 'TEORIA',
+          area: 'Area Circolazione Stradale',
+          code: 'Punto 3.1 (I parte)',
+          topic: 'Sensibilizzazione ai pericoli della strada',
+          hoursOrd: 10,
+          hoursAcc: 5,
+          teacherRole: 'teoria'
+        },
+        {
+          phase: 'TEORIA',
+          area: 'Area Circolazione Stradale',
+          code: 'Punto 3.5',
+          topic: 'Capacità di valutare le situazioni d\'emergenza (allineato a 19h Ord per totale 135h Area Circ. Stradale ex art. 9 co. 3 lett. a)',
+          hoursOrd: 19,
+          hoursAcc: 10,
+          teacherRole: 'teoria'
+        },
+
+        // Area Autotrasporto (50h Ord / 25h Acc) - Esperto Organizzazione Aziendale
+        {
+          phase: 'TEORIA',
+          area: 'Area Autotrasporto',
+          code: 'Punto 2.1',
+          topic: 'Conoscenza del contesto sociale dell\'autotrasporto e della relativa regolamentazione',
+          hoursOrd: 24,
+          hoursAcc: 12,
+          teacherRole: 'esperto'
+        },
+        {
+          phase: 'TEORIA',
+          area: 'Area Autotrasporto',
+          code: 'Punto 3.2',
+          topic: 'Capacità di prevenire la criminalità ed il traffico di clandestini (fenomeni e traffici criminali)',
+          hoursOrd: 10,
+          hoursAcc: 5,
+          teacherRole: 'esperto'
+        },
+        {
+          phase: 'TEORIA',
+          area: 'Area Autotrasporto',
+          code: 'Punto 3.6',
+          topic: 'Capacità di comportarsi in modo da valorizzare l\'immagine dell\'azienda e fondamenti di logistica sostenibile',
+          hoursOrd: 16,
+          hoursAcc: 8,
+          teacherRole: 'esperto'
+        },
+
+        // Area Medica (35h Ord / 17h Acc) - Medico / Psicologo
+        {
+          phase: 'TEORIA',
+          area: 'Area Medica',
+          code: 'Punto 3.1 (II parte)',
+          topic: 'Sensibilizzazione agli infortuni sul lavoro',
+          hoursOrd: 14,
+          hoursAcc: 7,
+          teacherRole: 'medico'
+        },
+        {
+          phase: 'TEORIA',
+          area: 'Area Medica',
+          code: 'Punto 3.3',
+          topic: 'Capacità di prevenire i rischi fisici',
+          hoursOrd: 14,
+          hoursAcc: 7,
+          teacherRole: 'medico'
+        },
+        {
+          phase: 'TEORIA',
+          area: 'Area Medica',
+          code: 'Punto 3.4',
+          topic: 'Consapevolezza dell\'importanza dell\'idoneità fisica e mentale (alimentazione, alcol, farmaci, stress, riposo — allineato a 7h Ord per totale 35h Area Medica)',
+          hoursOrd: 7,
+          hoursAcc: 3,
+          teacherRole: 'medico'
+        }
+      ],
+
+      // PARTE SPECIALISTICA TEORIA TRASPORTO COSE (40h Ord / 20h Acc) - Esperto Organizzazione Aziendale
+      teoriaSpecMerci: [
+        {
+          phase: 'TEORIA',
+          area: 'Parte Specialistica Cose (Teoria)',
+          code: 'Punto 1.4',
+          topic: 'Capacità di caricare il veicolo rispettandone i principi di sicurezza e di corretto utilizzo',
+          hoursOrd: 10,
+          hoursAcc: 5,
+          teacherRole: 'esperto'
+        },
+        {
+          phase: 'TEORIA',
+          area: 'Parte Specialistica Cose (Teoria)',
+          code: 'Punto 2.2',
+          topic: 'Conoscenza della regolamentazione relativa al trasporto di merci',
+          hoursOrd: 16,
+          hoursAcc: 8,
+          teacherRole: 'esperto'
+        },
+        {
+          phase: 'TEORIA',
+          area: 'Parte Specialistica Cose (Teoria)',
+          code: 'Punto 3.7',
+          topic: 'Conoscenza del contesto economico dell\'autotrasporto di merci, organizzazione del mercato e prospettive di sviluppo nell\'ottica della transizione ecologica',
+          hoursOrd: 14,
+          hoursAcc: 7,
+          teacherRole: 'esperto'
+        }
+      ],
+
+      // PARTE SPECIALISTICA TEORIA TRASPORTO PERSONE (40h Ord / 20h Acc) - Esperto Organizzazione Aziendale
+      teoriaSpecPersone: [
+        {
+          phase: 'TEORIA',
+          area: 'Parte Specialistica Persone (Teoria)',
+          code: 'Punto 1.5',
+          topic: 'Capacità di assicurare la sicurezza e il comfort dei passeggeri',
+          hoursOrd: 10,
+          hoursAcc: 5,
+          teacherRole: 'esperto'
+        },
+        {
+          phase: 'TEORIA',
+          area: 'Parte Specialistica Persone (Teoria)',
+          code: 'Punto 1.6',
+          topic: 'Capacità di caricare il veicolo rispettandone i principi di sicurezza e di corretto utilizzo (bagagli e passeggeri)',
+          hoursOrd: 10,
+          hoursAcc: 5,
+          teacherRole: 'esperto'
+        },
+        {
+          phase: 'TEORIA',
+          area: 'Parte Specialistica Persone (Teoria)',
+          code: 'Punto 2.3',
+          topic: 'Conoscenza della regolamentazione relativa al trasporto di persone',
+          hoursOrd: 10,
+          hoursAcc: 5,
+          teacherRole: 'esperto'
+        },
+        {
+          phase: 'TEORIA',
+          area: 'Parte Specialistica Persone (Teoria)',
+          code: 'Punto 3.8',
+          topic: 'Conoscenza del contesto economico dell\'autotrasporto di persone e dell\'organizzazione del mercato',
+          hoursOrd: 10,
+          hoursAcc: 5,
+          teacherRole: 'esperto'
+        }
+      ],
+
+      // PARTE PRATICA ORDINARIO (20h: 15h Comune + 5h Specialistica) - Istruttore di Guida
+      praticaOrdComune: [
+        { phase: 'PRATICA', area: 'Pratica — Parte Comune', code: 'Modulo 1', topic: 'Guida in autostrada (individuale)', hours: 2, individual: true, teacherRole: 'istruttore' },
+        { phase: 'PRATICA', area: 'Pratica — Parte Comune', code: 'Modulo 2', topic: 'Uso dei dispositivi di segnalazione visiva, di illuminazione e di emergenza (individuale)', hours: 2, individual: true, teacherRole: 'istruttore' },
+        { phase: 'PRATICA', area: 'Pratica — Parte Comune', code: 'Modulo 3', topic: 'Uso degli attrezzi per interventi di piccola manutenzione ordinaria (collettiva/dimostrativa)', hours: 1, individual: false, teacherRole: 'istruttore' },
+        { phase: 'PRATICA', area: 'Pratica — Parte Comune', code: 'Modulo 4', topic: 'Sostituzione pneumatico (collettiva/dimostrativa)', hours: 1, individual: false, teacherRole: 'istruttore' },
+        { phase: 'PRATICA', area: 'Pratica — Parte Comune', code: 'Modulo 5', topic: 'Montaggio catene da neve (collettiva/dimostrativa)', hours: 2, individual: false, teacherRole: 'istruttore' },
+        { phase: 'PRATICA', area: 'Pratica — Parte Comune', code: 'Modulo 6', topic: 'Uso del cronotachigrafo (collettiva/dimostrativa)', hours: 1, individual: false, teacherRole: 'istruttore' },
+        { phase: 'PRATICA', area: 'Pratica — Parte Comune', code: 'Modulo 7', topic: 'Manovre di precisione: slalom, retromarcia in un passaggio stretto (individuale / simulatore)', hours: 3, individual: true, teacherRole: 'istruttore' },
+        { phase: 'PRATICA', area: 'Pratica — Parte Comune', code: 'Modulo 8', topic: 'Manovre di frenata di emergenza (individuale / simulatore)', hours: 3, individual: true, teacherRole: 'istruttore' }
+      ],
+      praticaOrdSpecMerci: [
+        { phase: 'PRATICA', area: 'Pratica — Specialistica Cose', code: 'Modulo a.1', topic: 'Esercizi di sistemazione del carico e posizionamento in sicurezza del veicolo per carico/scarico merce', hours: 1, individual: false, teacherRole: 'istruttore' },
+        { phase: 'PRATICA', area: 'Pratica — Specialistica Cose', code: 'Modulo a.2', topic: 'Guida sicura ed attenta al risparmio energetico (individuale)', hours: 1, individual: true, teacherRole: 'istruttore' },
+        { phase: 'PRATICA', area: 'Pratica — Specialistica Cose', code: 'Modulo a.3', topic: 'Perfezionamento nell\'uso dei sistemi di rallentamento ausiliari (freno motore e/o rallentatore)', hours: 2, individual: true, teacherRole: 'istruttore' },
+        { phase: 'PRATICA', area: 'Pratica — Specialistica Cose', code: 'Modulo a.4', topic: 'Uso degli estintori (collettiva/dimostrativa)', hours: 1, individual: false, teacherRole: 'istruttore' }
+      ],
+      praticaOrdSpecPersone: [
+        { phase: 'PRATICA', area: 'Pratica — Specialistica Persone', code: 'Modulo b.1', topic: 'Uso degli estintori, sperimentazione funzionamento sistemi di emergenza (uscite sicurezza, stacca batterie)', hours: 1, individual: false, teacherRole: 'istruttore' },
+        { phase: 'PRATICA', area: 'Pratica — Specialistica Persone', code: 'Modulo b.2', topic: 'Sistemazione dei bagagli e verifica delle variazioni di assetto del veicolo (30 min)', hours: 0.5, individual: false, teacherRole: 'istruttore' },
+        { phase: 'PRATICA', area: 'Pratica — Specialistica Persone', code: 'Modulo b.3', topic: 'Manovre particolari: posizionamento in sicurezza del veicolo per carico e scarico dei bagagli (30 min)', hours: 0.5, individual: true, teacherRole: 'istruttore' },
+        { phase: 'PRATICA', area: 'Pratica — Specialistica Persone', code: 'Modulo b.4', topic: 'Perfezionamento nell\'uso dei sistemi di rallentamento ausiliari (freno motore o rallentatore)', hours: 2, individual: true, teacherRole: 'istruttore' },
+        { phase: 'PRATICA', area: 'Pratica — Specialistica Persone', code: 'Modulo b.5', topic: 'Esercizi per il perfezionamento di una guida confortevole per i passeggeri (individuale)', hours: 1, individual: true, teacherRole: 'istruttore' }
+      ],
+
+      // PARTE PRATICA ACCELERATO (10h: 7.5h Comune + 2.5h Specialistica) - Istruttore di Guida
+      praticaAccComune: [
+        { phase: 'PRATICA', area: 'Pratica — Parte Comune', code: 'Modulo 1', topic: 'Guida in autostrada (individuale)', hours: 1, individual: true, teacherRole: 'istruttore' },
+        { phase: 'PRATICA', area: 'Pratica — Parte Comune', code: 'Modulo 2', topic: 'Uso dei dispositivi di segnalazione visiva, di illuminazione e di emergenza (individuale)', hours: 1, individual: true, teacherRole: 'istruttore' },
+        { phase: 'PRATICA', area: 'Pratica — Parte Comune', code: 'Modulo 3', topic: 'Sostituzione pneumatico (30 min - collettiva/dimostrativa)', hours: 0.5, individual: false, teacherRole: 'istruttore' },
+        { phase: 'PRATICA', area: 'Pratica — Parte Comune', code: 'Modulo 4', topic: 'Montaggio catene da neve (30 min - collettiva/dimostrativa)', hours: 0.5, individual: false, teacherRole: 'istruttore' },
+        { phase: 'PRATICA', area: 'Pratica — Parte Comune', code: 'Modulo 5', topic: 'Uso del cronotachigrafo (30 min - collettiva/dimostrativa)', hours: 0.5, individual: false, teacherRole: 'istruttore' },
+        { phase: 'PRATICA', area: 'Pratica — Parte Comune', code: 'Modulo 6', topic: 'Manovre di precisione: slalom, retromarcia in un passaggio stretto (individuale / simulatore)', hours: 2, individual: true, teacherRole: 'istruttore' },
+        { phase: 'PRATICA', area: 'Pratica — Parte Comune', code: 'Modulo 7', topic: 'Manovre di frenata di emergenza (individuale / simulatore)', hours: 2, individual: true, teacherRole: 'istruttore' }
+      ],
+      praticaAccSpecMerci: [
+        { phase: 'PRATICA', area: 'Pratica — Specialistica Cose', code: 'Modulo a.1', topic: 'Guida sicura ed attenta al risparmio energetico (30 min - individuale)', hours: 0.5, individual: true, teacherRole: 'istruttore' },
+        { phase: 'PRATICA', area: 'Pratica — Specialistica Cose', code: 'Modulo a.2', topic: 'Perfezionamento nell\'uso dei sistemi di rallentamento ausiliari (freno motore/rallentatore)', hours: 1, individual: true, teacherRole: 'istruttore' },
+        { phase: 'PRATICA', area: 'Pratica — Specialistica Cose', code: 'Modulo a.3', topic: 'Uso degli estintori (30 min - collettiva/dimostrativa)', hours: 0.5, individual: false, teacherRole: 'istruttore' },
+        { phase: 'PRATICA', area: 'Pratica — Specialistica Cose', code: 'Modulo a.4', topic: 'Esercizi di sistemazione del carico e posizionamento in sicurezza per carico/scarico merce (30 min)', hours: 0.5, individual: false, teacherRole: 'istruttore' }
+      ],
+      praticaAccSpecPersone: [
+        { phase: 'PRATICA', area: 'Pratica — Specialistica Persone', code: 'Modulo b.1', topic: 'Manovre particolari: posizionamento in sicurezza del veicolo per carico e scarico dei bagagli (30 min)', hours: 0.5, individual: true, teacherRole: 'istruttore' },
+        { phase: 'PRATICA', area: 'Pratica — Specialistica Persone', code: 'Modulo b.2', topic: 'Perfezionamento nell\'uso dei sistemi di rallentamento ausiliari (freno motore e/o rallentatore - 1h 30m)', hours: 1.5, individual: true, teacherRole: 'istruttore' },
+        { phase: 'PRATICA', area: 'Pratica — Specialistica Persone', code: 'Modulo b.3', topic: 'Esercizi per il perfezionamento di una guida confortevole per i passeggeri (30 min - individuale)', hours: 0.5, individual: true, teacherRole: 'istruttore' }
+      ],
+
+      // FORMAZIONE PERIODICA / RINNOVO (35h: 5 Moduli da 7 ore)
+      rinnovoComune: [
+        {
+          phase: 'TEORIA',
+          area: 'Formazione Periodica — Parte Comune',
+          code: 'Modulo 1 (lett. a)',
+          topic: 'Conoscenza dei dispositivi del veicolo e condotta di guida',
+          hours: 7,
+          teacherRole: 'teoria'
+        },
+        {
+          phase: 'TEORIA',
+          area: 'Formazione Periodica — Parte Comune',
+          code: 'Modulo 2 (lett. b)',
+          topic: 'Conoscenza delle norme che regolamentano la circolazione stradale e responsabilità del conducente',
+          hours: 7,
+          teacherRole: 'teoria'
+        },
+        {
+          phase: 'TEORIA',
+          area: 'Formazione Periodica — Parte Comune',
+          code: 'Modulo 3 (lett. c)',
+          topic: 'Conoscenza dei rischi alla salute derivanti dallo svolgimento dell\'attività professionale; condizioni psicofisiche dei conducenti',
+          hours: 7,
+          teacherRole: 'medico'
+        }
+      ],
+      rinnovoMerci: [
+        {
+          phase: 'TEORIA',
+          area: 'Formazione Periodica — Specialistica Cose',
+          code: 'Modulo 4a (a.1)',
+          topic: 'Carico e scarico delle merci',
+          hours: 7,
+          teacherRole: 'esperto'
+        },
+        {
+          phase: 'TEORIA',
+          area: 'Formazione Periodica — Specialistica Cose',
+          code: 'Modulo 5a (a.2)',
+          topic: 'Compiti del conducente e disposizioni normative sul trasporto di cose',
+          hours: 7,
+          teacherRole: 'esperto'
+        }
+      ],
+      rinnovoPersone: [
+        {
+          phase: 'TEORIA',
+          area: 'Formazione Periodica — Specialistica Persone',
+          code: 'Modulo 4b (b.1)',
+          topic: 'Compiti del conducente nei confronti dell\'azienda e dei passeggeri, formazione in materia di sensibilizzazione alla disabilità (Reg. UE n. 181/2011)',
+          hours: 7,
+          teacherRole: 'esperto'
+        },
+        {
+          phase: 'TEORIA',
+          area: 'Formazione Periodica — Specialistica Persone',
+          code: 'Modulo 5b (b.2)',
+          topic: 'Disposizioni normative sul trasporto di persone',
+          hours: 7,
+          teacherRole: 'esperto'
+        }
+      ]
+    };
+
+    /* =========================================================================
+       2. STATO APPLICAZIONE E INIZIALIZZAZIONE
+       ========================================================================= */
+    let weekdaySlots = [
+      { start: '09:00', end: '12:00' },
+      { start: '14:00', end: '18:00' }
+    ];
+    let weekendSlots = [];
+    let excludedDates = new Set();
+    let generatedRows = [];
+    let currentFilter = 'ALL';
+
+    const DAY_NAMES_IT = ['Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato'];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Imposta data di inizio al prossimo lunedì lavorativo
+      const today = new Date();
+      const nextMonday = new Date(today);
+      const dayOfWeek = today.getDay();
+      const daysUntilMonday = dayOfWeek === 1 ? 7 : (8 - dayOfWeek) % 7;
+      nextMonday.setDate(today.getDate() + daysUntilMonday);
+      document.getElementById('startDate').value = formatDateISO(nextMonday);
+
+      // Listener su checkbox giorni
+      for (let i = 0; i <= 6; i++) {
+        document.getElementById('day' + i).addEventListener('change', () => {
+          toggleWeekendContainer();
+          generateSchedule();
+        });
+      }
+
+      renderSlots('weekday');
+      renderSlots('weekend');
+      loadItalianHolidays(false);
+      onCourseTypeChange();
+    });
+
+    /* =========================================================================
+       3. GESTIONE UI INPUT (FASCE ORARIE, FESTIVITÀ, PRESET)
+       ========================================================================= */
+    function onCourseTypeChange() {
+      const type = document.getElementById('courseType').value;
+      const hasPractice = ['ord', 'acc', 'ext_ord', 'ext_acc'].includes(type);
+      document.getElementById('groupDocIstruttore').style.display = hasPractice ? 'block' : 'none';
+      generateSchedule();
+    }
+
+    function toggleWeekendContainer() {
+      const sat = document.getElementById('day6').checked;
+      const sun = document.getElementById('day0').checked;
+      document.getElementById('weekendSlotsContainer').style.display = (sat || sun) ? 'block' : 'none';
+    }
+
+    function applyPreset(presetName) {
+      if (presetName === 'full7') {
+        weekdaySlots = [
+          { start: '09:00', end: '12:00' },
+          { start: '14:00', end: '18:00' }
+        ];
+      } else if (presetName === 'full8') {
+        weekdaySlots = [
+          { start: '08:30', end: '12:30' },
+          { start: '14:00', end: '18:00' }
+        ];
+      } else if (presetName === 'serale3') {
+        weekdaySlots = [
+          { start: '19:00', end: '22:00' }
+        ];
+      } else if (presetName === 'mattina4') {
+        weekdaySlots = [
+          { start: '08:30', end: '12:30' }
+        ];
+      }
+      renderSlots('weekday');
+      generateSchedule();
+    }
+
+    function addSlot(target, start = '09:00', end = '12:00') {
+      if (target === 'weekday') {
+        weekdaySlots.push({ start, end });
+      } else {
+        weekendSlots.push({ start, end });
+      }
+      renderSlots(target);
+      generateSchedule();
+    }
+
+    function removeSlot(target, index) {
+      if (target === 'weekday') {
+        if (weekdaySlots.length <= 1) return;
+        weekdaySlots.splice(index, 1);
+      } else {
+        weekendSlots.splice(index, 1);
+      }
+      renderSlots(target);
+      generateSchedule();
+    }
+
+    function updateSlot(target, index, field, value) {
+      const list = target === 'weekday' ? weekdaySlots : weekendSlots;
+      list[index][field] = value;
+      renderSlots(target);
+      generateSchedule();
+    }
+
+    function renderSlots(target) {
+      const container = document.getElementById(target === 'weekday' ? 'weekdaySlots' : 'weekendSlots');
+      const list = target === 'weekday' ? weekdaySlots : weekendSlots;
+      container.innerHTML = '';
+
+      list.forEach((slot, idx) => {
+        const mins = timeToMinutes(slot.end) - timeToMinutes(slot.start);
+        const hrsText = mins > 0 ? formatDuration(mins / 60) : 'Err';
+        const row = document.createElement('div');
+        row.className = 'slot-row';
+        row.innerHTML = `
+          <input type="time" value="${slot.start}" onchange="updateSlot('${target}', ${idx}, 'start', this.value)" />
+          <input type="time" value="${slot.end}" onchange="updateSlot('${target}', ${idx}, 'end', this.value)" />
+          <div style="display:flex; align-items:center; gap:4px;">
+            <span class="slot-badge">${hrsText}</span>
+            ${(target === 'weekend' || list.length > 1)
+              ? `<button type="button" class="btn btn-danger-ghost" onclick="removeSlot('${target}', ${idx})" title="Rimuovi fascia">✕</button>`
+              : ''}
+          </div>
+        `;
+        container.appendChild(row);
+      });
+    }
+
+    function addHoliday() {
+      const val = document.getElementById('holidayInput').value;
+      if (!val) return;
+      excludedDates.add(val);
+      document.getElementById('holidayInput').value = '';
+      renderHolidays();
+      generateSchedule();
+    }
+
+    function removeHoliday(dateStr) {
+      excludedDates.delete(dateStr);
+      renderHolidays();
+      generateSchedule();
+    }
+
+    function loadItalianHolidays(triggerGenerate = true) {
+      const startVal = document.getElementById('startDate').value;
+      const baseYear = startVal ? parseInt(startVal.split('-')[0], 10) : new Date().getFullYear();
+      [baseYear, baseYear + 1].forEach(y => {
+        const fixed = [
+          `${y}-01-01`, // Capodanno
+          `${y}-01-06`, // Epifania
+          `${y}-04-25`, // Liberazione
+          `${y}-05-01`, // Festa del Lavoro
+          `${y}-06-02`, // Festa della Repubblica
+          `${y}-08-15`, // Ferragosto
+          `${y}-11-01`, // Tutti i Santi
+          `${y}-12-08`, // Immacolata
+          `${y}-12-25`, // Natale
+          `${y}-12-26`  // Santo Stefano
+        ];
+        fixed.forEach(d => excludedDates.add(d));
+        // Calcolo Pasquetta (Lunedì dell'Angelo)
+        const easter = computeEaster(y);
+        const easterMonday = new Date(easter);
+        easterMonday.setDate(easter.getDate() + 1);
+        excludedDates.add(formatDateISO(easterMonday));
+      });
+      renderHolidays();
+      if (triggerGenerate) generateSchedule();
+    }
+
+    function computeEaster(year) {
+      const a = year % 19;
+      const b = Math.floor(year / 100);
+      const c = year % 100;
+      const d = Math.floor(b / 4);
+      const e = b % 4;
+      const f = Math.floor((b + 8) / 25);
+      const g = Math.floor((b - f + 1) / 3);
+      const h = (19 * a + b - d - g + 15) % 30;
+      const i = Math.floor(c / 4);
+      const k = c % 4;
+      const l = (32 + 2 * e + 2 * i - h - k) % 7;
+      const m = Math.floor((a + 11 * h + 22 * l) / 451);
+      const month = Math.floor((h + l - 7 * m + 114) / 31);
+      const day = ((h + l - 7 * m + 114) % 31) + 1;
+      return new Date(year, month - 1, day);
+    }
+
+    function renderHolidays() {
+      const container = document.getElementById('holidayTags');
+      const sorted = Array.from(excludedDates).sort();
+      container.innerHTML = sorted.map(d => `
+        <span class="tag">
+          ${formatDateIT(d)}
+          <button type="button" onclick="removeHoliday('${d}')" title="Rimuovi">×</button>
+        </span>
+      `).join('');
+    }
+
+    /* =========================================================================
+       4. COSTRUZIONE DEL PROGRAMMA DIDATTICO IN BASE ALLE SCELTE
+       ========================================================================= */
+    function buildCurriculum(courseType, indirizzo) {
+      const items = [];
+      const isMerci = indirizzo === 'merci';
+
+      if (courseType === 'ord' || courseType === 'acc') {
+        const isOrd = courseType === 'ord';
+        // 1. Parte Teorica Comune
+        CQC_DATABASE.teoriaComune.forEach(m => {
+          items.push({
+            ...m,
+            hours: isOrd ? m.hoursOrd : m.hoursAcc,
+            individual: false
+          });
+        });
+        // 2. Parte Teorica Specialistica
+        const specTeoria = isMerci ? CQC_DATABASE.teoriaSpecMerci : CQC_DATABASE.teoriaSpecPersone;
+        specTeoria.forEach(m => {
+          items.push({
+            ...m,
+            hours: isOrd ? m.hoursOrd : m.hoursAcc,
+            individual: false
+          });
+        });
+        // 3. Parte Pratica Comune
+        const pratComune = isOrd ? CQC_DATABASE.praticaOrdComune : CQC_DATABASE.praticaAccComune;
+        pratComune.forEach(m => items.push({ ...m }));
+        // 4. Parte Pratica Specialistica
+        const pratSpec = isOrd
+          ? (isMerci ? CQC_DATABASE.praticaOrdSpecMerci : CQC_DATABASE.praticaOrdSpecPersone)
+          : (isMerci ? CQC_DATABASE.praticaAccSpecMerci : CQC_DATABASE.praticaAccSpecPersone);
+        pratSpec.forEach(m => items.push({ ...m }));
+
+      } else if (courseType === 'ext_ord' || courseType === 'ext_acc' || courseType === 'ext_ord_only_t' || courseType === 'ext_acc_only_t') {
+        const isOrd = courseType.includes('ord');
+        const includePractice = !courseType.includes('only_t');
+
+        const specTeoria = isMerci ? CQC_DATABASE.teoriaSpecMerci : CQC_DATABASE.teoriaSpecPersone;
+        specTeoria.forEach(m => {
+          items.push({
+            ...m,
+            hours: isOrd ? m.hoursOrd : m.hoursAcc,
+            individual: false
+          });
+        });
+
+        if (includePractice) {
+          const pratSpec = isOrd
+            ? (isMerci ? CQC_DATABASE.praticaOrdSpecMerci : CQC_DATABASE.praticaOrdSpecPersone)
+            : (isMerci ? CQC_DATABASE.praticaAccSpecMerci : CQC_DATABASE.praticaAccSpecPersone);
+          pratSpec.forEach(m => items.push({ ...m }));
+        }
+
+      } else if (courseType === 'rinnovo') {
+        CQC_DATABASE.rinnovoComune.forEach(m => items.push({ ...m, individual: false }));
+        const rinSpec = isMerci ? CQC_DATABASE.rinnovoMerci : CQC_DATABASE.rinnovoPersone;
+        rinSpec.forEach(m => items.push({ ...m, individual: false }));
+      }
+
+      return items;
+    }
+
+    /* =========================================================================
+       5. MOTORE DI VALIDAZIONE NORMATIVA (DM 30/07/2021 & CIRC. 31895/2021)
+       ========================================================================= */
+    function validateConfiguration(config, curriculum) {
+      const errors = [];
+      const warnings = [];
+
+      if (!config.startDate) {
+        errors.push('Selezionare una data di inizio corso valida.');
+      }
+
+      if (config.activeDays.size === 0) {
+        errors.push('Selezionare almeno un giorno della settimana attivo.');
+      }
+
+      // Controllo se tutti i giorni attivi sono esclusi o se almeno 1 giorno è valido
+      const hasPractice = curriculum.some(m => m.phase === 'PRATICA');
+      const hasTheory = curriculum.some(m => m.phase === 'TEORIA');
+      const isRinnovo = config.courseType === 'rinnovo';
+      const maxDailyHours = isRinnovo ? 7 : 8;
+
+      // Verifica fasce orarie per ciascun giorno attivo
+      const sortedDays = Array.from(config.activeDays).sort();
+
+      sortedDays.forEach(dow => {
+        const dayName = DAY_NAMES_IT[dow];
+        const isWeekend = (dow === 0 || dow === 6);
+        const slots = (isWeekend && config.weekendSlots.length > 0)
+          ? config.weekendSlots
+          : config.weekdaySlots;
+
+        if (!slots || slots.length === 0) {
+          errors.push(`${dayName}: nessuna fascia oraria configurata.`);
+          return;
+        }
+
+        // Controllo sintassi, ordine e sovrapposizioni fasce
+        const parsedSlots = [];
+        let dailyMinutes = 0;
+
+        slots.forEach((s, i) => {
+          const startM = timeToMinutes(s.start);
+          const endM = timeToMinutes(s.end);
+          if (isNaN(startM) || isNaN(endM) || endM <= startM) {
+            errors.push(`${dayName} (Fascia ${i + 1}): l'orario di fine (${s.end}) deve essere successivo all'inizio (${s.start}).`);
+            return;
+          }
+          const durM = endM - startM;
+          if (durM % 30 !== 0) {
+            errors.push(`${dayName} (Fascia ${s.start}-${s.end}): la durata deve essere un multiplo di 30 minuti.`);
+          }
+          dailyMinutes += durM;
+          parsedSlots.push({ startM, endM, start: s.start, end: s.end });
+        });
+
+        // Verifica sovrapposizione fasce
+        const byStart = [...parsedSlots].sort((a, b) => a.startM - b.startM);
+        for (let i = 1; i < byStart.length; i++) {
+          if (byStart[i].startM < byStart[i - 1].endM) {
+            errors.push(`${dayName}: le fasce orarie ${byStart[i - 1].start}-${byStart[i - 1].end} e ${byStart[i].start}-${byStart[i].end} si sovrappongono.`);
+          }
+        }
+
+        const dailyHours = dailyMinutes / 60;
+
+        // Regola durata giornaliera minima e massima
+        if (dailyHours < 2) {
+          if (!hasPractice || hasTheory) {
+            errors.push(`${dayName}: durata giornaliera pari a ${formatDuration(dailyHours)}. Il minimo consentito per la teoria e le lezioni collettive è 2 ore al giorno (1h ammessa solo per guide individuali).`);
+          } else {
+            warnings.push(`${dayName}: durata giornaliera di ${formatDuration(dailyHours)} ammessa esclusivamente per le esercitazioni pratiche di guida individuale.`);
+          }
+        }
+
+        if (dailyHours > maxDailyHours) {
+          errors.push(`${dayName}: durata giornaliera pari a ${formatDuration(dailyHours)}. Il massimo consentito dalla Motorizzazione è ${maxDailyHours} ore/giorno${isRinnovo ? ' per la Formazione Periodica' : ''}.`);
+        }
+
+        // Regole finestre orarie TEORIA
+        if (hasTheory) {
+          parsedSlots.forEach(s => {
+            if (dow >= 1 && dow <= 5) {
+              // Lun-Ven: 08:00 - 22:00
+              if (s.startM < 8 * 60 || s.endM > 22 * 60) {
+                errors.push(`${dayName} (Teoria, fascia ${s.start}-${s.end}): dal lunedì al venerdì le lezioni teoriche sono consentite solo nella fascia 08:00 - 22:00.`);
+              }
+            } else {
+              // Sab-Dom: 08:00 - 18:00 (Iniziale) o 08:00 - 15:00 (Periodica)
+              const maxEnd = isRinnovo ? 15 * 60 : 18 * 60;
+              const maxEndLabel = isRinnovo ? '15:00' : '18:00';
+              if (s.startM < 8 * 60 || s.endM > maxEnd) {
+                errors.push(`${dayName} (Teoria, fascia ${s.start}-${s.end}): nel fine settimana l'orario consentito per ${isRinnovo ? 'la Formazione Periodica' : 'la Qualificazione Iniziale'} è 08:00 - ${maxEndLabel}.`);
+              }
+            }
+          });
+        }
+
+        // Regole finestre orarie PRATICA
+        if (hasPractice) {
+          if (dow === 0) {
+            errors.push(`Domenica: lo svolgimento delle lezioni pratiche è vietato dalla normativa.`);
+          } else if (dow === 6) {
+            parsedSlots.forEach(s => {
+              if (s.startM < 8 * 60 || s.endM > 14 * 60) {
+                errors.push(`Sabato (Pratica, fascia ${s.start}-${s.end}): il sabato le lezioni pratiche sono consentite esclusivamente dalle 08:00 alle 14:00.`);
+              }
+            });
+          } else {
+            parsedSlots.forEach(s => {
+              if (s.startM < 8 * 60 || s.endM > 22 * 60) {
+                errors.push(`${dayName} (Pratica, fascia ${s.start}-${s.end}): dal lunedì al venerdì la pratica è consentita dalle 08:00 alle 22:00.`);
+              }
+            });
+          }
+        }
+      });
+
+      // Avviso normativo sulla disciplina transitoria della domenica (art. 23 DM 30/07/2021)
+      if (config.activeDays.has(0) && !hasPractice) {
+        warnings.push('Nota normativa (Circ. MIT 31895/2021, par. 3.5.5 e 3.6.8): l\'erogazione delle lezioni la domenica è prevista a regime dal DM 30/07/2021 (subordinata all\'operatività del sistema biometrico UMC).');
+      }
+
+      return { errors, warnings };
+    }
+
+    /* =========================================================================
+       6. ALGORITMO DI SPEZZETTAMENTO IN BLOCCHI (2h / 3h) E SCHEDULING
+       ========================================================================= */
+
+    /**
+     * Suddivide una fascia oraria (in minuti) in blocchi da massimo 3 ore (180 min)
+     * evitando residui inferiori a 2 ore (120 min) quando la fascia è >= 4 ore.
+     * Esempi:
+     *  - 3h (180m) -> [180]
+     *  - 4h (240m) -> [120, 120] (2h + 2h)
+     *  - 5h (300m) -> [180, 120] (3h + 2h)
+     *  - 6h (360m) -> [180, 180] (3h + 3h)
+     *  - 7h (420m) -> [180, 120, 120] (3h + 2h + 2h)
+     *  - 8h (480m) -> [180, 180, 120] (3h + 3h + 2h)
+     */
+    function splitShiftIntoBiometricBlocks(startM, endM) {
+      const totalM = endM - startM;
+      if (totalM <= 180) {
+        return [{ startM, endM, durationM: totalM }];
+      }
+
+      const durations = [];
+      let rem = totalM;
+
+      while (rem > 0) {
+        if (rem <= 180) {
+          durations.push(rem);
+          rem = 0;
+        } else if (rem === 240) {
+          // 4h -> 2h + 2h
+          durations.push(120, 120);
+          rem = 0;
+        } else if (rem === 210) {
+          // 3.5h -> 2h + 1.5h
+          durations.push(120, 90);
+          rem = 0;
+        } else {
+          durations.push(180);
+          rem -= 180;
+        }
+      }
+
+      const blocks = [];
+      let cursor = startM;
+      for (const d of durations) {
+        blocks.push({
+          startM: cursor,
+          endM: cursor + d,
+          durationM: d
+        });
+        cursor += d;
+      }
+      return blocks;
+    }
+
+    function generateSchedule() {
+      const courseType = document.getElementById('courseType').value;
+      const indirizzo = document.querySelector('input[name="indirizzo"]:checked').value;
+      const startDate = document.getElementById('startDate').value;
+
+      const activeDays = new Set();
+      for (let i = 0; i <= 6; i++) {
+        if (document.getElementById('day' + i).checked) activeDays.add(i);
+      }
+
+      const teachers = {
+        teoria: document.getElementById('docTeoria').value.trim() || 'Insegnante di Teoria',
+        esperto: document.getElementById('docEsperto').value.trim() || 'Esperto Organizzazione Aziendale',
+        medico: document.getElementById('docMedico').value.trim() || 'Medico / Psicologo',
+        istruttore: document.getElementById('docIstruttore').value.trim() || 'Istruttore di Guida'
+      };
+
+      const config = {
+        courseType,
+        indirizzo,
+        startDate,
+        activeDays,
+        weekdaySlots: weekdaySlots.map(s => ({ ...s })),
+        weekendSlots: weekendSlots.map(s => ({ ...s })),
+        excludedDates: new Set(excludedDates),
+        teachers
+      };
+
+      const curriculum = buildCurriculum(courseType, indirizzo);
+      const { errors, warnings } = validateConfiguration(config, curriculum);
+
+      renderValidationMessages(errors, warnings);
+
+      if (errors.length > 0) {
+        generatedRows = [];
+        updateKPIs(config, curriculum, []);
+        document.getElementById('scheduleBody').innerHTML = `
+          <tr>
+            <td colspan="8" style="text-align:center; padding: 36px; color: var(--danger); font-weight: 600;">
+              ⚠️ Correggi i vincoli normativi segnalati sopra per generare il calendario.
+            </td>
+          </tr>
+        `;
+        document.getElementById('btnExportCsv').disabled = true;
+        document.getElementById('btnPrint').disabled = true;
+        return;
+      }
+
+      // Coda dei moduli da pianificare (in minuti per evitare arrotondamenti float)
+      const moduleQueue = curriculum.map(m => ({
+        ...m,
+        remainingM: Math.round(m.hours * 60),
+        teacherName: teachers[m.teacherRole]
+      }));
+
+      const rows = [];
+      let currentDate = parseDateISO(startDate);
+      let modIndex = 0;
+      let cumulativeMinutes = 0;
+      let safetyCounter = 0;
+      const MAX_DAYS = 1500; // Sicurezza anti-loop infinito
+
+      while (modIndex < moduleQueue.length && safetyCounter < MAX_DAYS) {
+        safetyCounter++;
+        const iso = formatDateISO(currentDate);
+        const dow = currentDate.getDay();
+
+        if (!activeDays.has(dow) || excludedDates.has(iso)) {
+          currentDate.setDate(currentDate.getDate() + 1);
+          continue;
+        }
+
+        const isWeekend = (dow === 0 || dow === 6);
+        const rawSlots = (isWeekend && config.weekendSlots.length > 0)
+          ? config.weekendSlots
+          : config.weekdaySlots;
+
+        // Ordina fasce cronologicamente e spezzetta ciascuna in blocchi biometrici da 2h / 3h
+        const sortedSlots = [...rawSlots].sort((a, b) => timeToMinutes(a.start) - timeToMinutes(b.start));
+        const dayBlocks = [];
+        sortedSlots.forEach(s => {
+          const subBlocks = splitShiftIntoBiometricBlocks(timeToMinutes(s.start), timeToMinutes(s.end));
+          dayBlocks.push(...subBlocks);
+        });
+
+        let isFirstRowOfDay = true;
+
+        for (let bIdx = 0; bIdx < dayBlocks.length; bIdx++) {
+          if (modIndex >= moduleQueue.length) break;
+
+          const block = dayBlocks[bIdx];
+          let blockCursorM = block.startM;
+          let blockRemM = block.durationM;
+
+          // All'interno di un singolo blocco (es. 3h = 180m), possiamo coprire uno o più punti programma in sequenza
+          while (blockRemM > 0 && modIndex < moduleQueue.length) {
+            const currentMod = moduleQueue[modIndex];
+
+            // Evita di mescolare Teoria e Pratica nello stesso blocco se non strettamente necessario,
+            // chiudendo la giornata di teoria e passando alla pratica nel blocco/giorno successivo
+            if (rows.length > 0) {
+              const prevRow = rows[rows.length - 1];
+              if (prevRow.dateISO === iso && prevRow.phase === 'TEORIA' && currentMod.phase === 'PRATICA') {
+                // Se il blocco è già iniziato per teoria, chiudiamo questo blocco e iniziamo la pratica nel prossimo blocco/giorno
+                if (blockCursorM > block.startM) {
+                  blockRemM = 0;
+                  break;
+                }
+              }
+            }
+
+            const allocM = Math.min(blockRemM, currentMod.remainingM);
+            const segStartM = blockCursorM;
+            const segEndM = blockCursorM + allocM;
+
+            cumulativeMinutes += allocM;
+            currentMod.remainingM -= allocM;
+            blockCursorM = segEndM;
+            blockRemM -= allocM;
+
+            rows.push({
+              dayName: DAY_NAMES_IT[dow],
+              dateISO: iso,
+              dateIT: formatDateIT(iso),
+              startTime: minutesToTime(segStartM),
+              endTime: minutesToTime(segEndM),
+              durationM: allocM,
+              durationHours: allocM / 60,
+              phase: currentMod.phase,
+              area: currentMod.area,
+              code: currentMod.code,
+              topic: currentMod.topic,
+              teacher: currentMod.teacherName,
+              cumulativeHours: cumulativeMinutes / 60,
+              isNewDay: isFirstRowOfDay,
+              blockIndex: bIdx + 1
+            });
+
+            isFirstRowOfDay = false;
+
+            if (currentMod.remainingM <= 0) {
+              modIndex++;
+            }
+          }
+        }
+
+        currentDate.setDate(currentDate.getDate() + 1);
+      }
+
+      generatedRows = rows;
+      document.getElementById('btnExportCsv').disabled = rows.length === 0;
+      document.getElementById('btnPrint').disabled = rows.length === 0;
+
+      populateTeacherFilter(rows);
+      updateKPIs(config, curriculum, rows);
+      updatePrintHeader(config, rows);
+      renderTable();
+    }
+
+    /* =========================================================================
+       7. RENDERING UI (VALIDAZIONE, KPI, TABELLA, STAMPA)
+       ========================================================================= */
+    function renderValidationMessages(errors, warnings) {
+      const box = document.getElementById('validationBox');
+      let html = '';
+
+      if (errors.length > 0) {
+        html += `
+          <div class="alert alert-danger">
+            <strong>⛔ Errori di conformità normativa rilevati (${errors.length}):</strong>
+            <ul>${errors.map(e => `<li>${e}</li>`).join('')}</ul>
+          </div>
+        `;
+      }
+
+      if (warnings.length > 0) {
+        html += `
+          <div class="alert alert-warning">
+            <strong>⚠️ Avvisi normativi:</strong>
+            <ul>${warnings.map(w => `<li>${w}</li>`).join('')}</ul>
+          </div>
+        `;
+      }
+
+      box.innerHTML = html;
+    }
+
+    function updateKPIs(config, curriculum, rows) {
+      const teoriaHours = curriculum.filter(m => m.phase === 'TEORIA').reduce((s, m) => s + m.hours, 0);
+      const praticaHours = curriculum.filter(m => m.phase === 'PRATICA').reduce((s, m) => s + m.hours, 0);
+      const totalHours = teoriaHours + praticaHours;
+
+      document.getElementById('kpiTotalHours').textContent = formatDuration(totalHours);
+      document.getElementById('kpiHoursBreakdown').textContent =
+        praticaHours > 0
+          ? `${formatDuration(teoriaHours)} Teoria + ${formatDuration(praticaHours)} Pratica`
+          : `${formatDuration(teoriaHours)} Solo Teoria`;
+
+      if (rows.length > 0) {
+        const uniqueDays = new Set(rows.map(r => r.dateISO));
+        // Conta i blocchi orari distinti (stessa data + stesso blockIndex)
+        const uniqueBlocks = new Set(rows.map(r => `${r.dateISO}_B${r.blockIndex}`));
+        document.getElementById('kpiTotalDays').textContent = `${uniqueDays.size} gg`;
+        document.getElementById('kpiDateRange').textContent = `Dal ${rows[0].dateIT} al ${rows[rows.length - 1].dateIT}`;
+        document.getElementById('kpiTotalBlocks').textContent = `${uniqueBlocks.size} blocchi`;
+      } else {
+        document.getElementById('kpiTotalDays').textContent = '—';
+        document.getElementById('kpiDateRange').textContent = 'Dal — al —';
+        document.getElementById('kpiTotalBlocks').textContent = '—';
+      }
+
+      // Calcolo max assenze consentite da DM 30/07/2021 (senza possibilità di recupero per teoria)
+      const absenceMap = {
+        ord: { max: '40 ore', detail: 'Max 28h Parte Comune + 12h Spec. (0h Pratica)' },
+        acc: { max: '20 ore', detail: 'Max 14h Parte Comune + 6h Spec. (0h Pratica)' },
+        ext_ord: { max: '12 ore', detail: 'Max 12h Teoria Spec. (0h Pratica)' },
+        ext_acc: { max: '6 ore', detail: 'Max 6h Teoria Spec. (0h Pratica)' },
+        ext_ord_only_t: { max: '12 ore', detail: 'Max 12h Teoria Spec. (nessun recupero)' },
+        ext_acc_only_t: { max: '6 ore', detail: 'Max 6h Teoria Spec. (nessun recupero)' },
+        rinnovo: { max: '5 ore', detail: 'Art. 16 co. 6 DM 30/07/2021 (nessun recupero)' }
+      };
+      const absInfo = absenceMap[config.courseType] || { max: '—', detail: '' };
+      document.getElementById('kpiMaxAbsences').textContent = absInfo.max;
+      document.getElementById('kpiAbsencesDetail').textContent = absInfo.detail;
+    }
+
+    function updatePrintHeader(config, rows) {
+      const courseSelect = document.getElementById('courseType');
+      const courseLabel = courseSelect.options[courseSelect.selectedIndex].text;
+      const indLabel = config.indirizzo === 'merci' ? 'Trasporto di Cose (Merci)' : 'Trasporto di Persone';
+      const school = document.getElementById('schoolName').value.trim() || 'Soggetto Erogatore Autorizzato';
+
+      document.getElementById('printTitle').textContent = `CALENDARIO UFFICIALE CORSO CQC — ${indLabel.toUpperCase()}`;
+      document.getElementById('printSubtitle').textContent = `${school} • ${courseLabel}`;
+
+      const dateRange = rows.length > 0 ? `Dal ${rows[0].dateIT} al ${rows[rows.length - 1].dateIT}` : '';
+      document.getElementById('printMeta').innerHTML = `
+        <div><strong>Periodo svolgimento:</strong> ${dateRange}</div>
+        <div><strong>Insegnante Teoria:</strong> ${escapeHtml(config.teachers.teoria)}</div>
+        <div><strong>Esperto Org. Aziendale:</strong> ${escapeHtml(config.teachers.esperto)}</div>
+        <div><strong>Medico / Psicologo:</strong> ${escapeHtml(config.teachers.medico)}</div>
+        <div><strong>Istruttore di Guida:</strong> ${escapeHtml(config.teachers.istruttore)}</div>
+        <div><strong>Normativa:</strong> DM 30/07/2021 — Circ. MIT 31895/2021</div>
+      `;
+    }
+
+    function populateTeacherFilter(rows) {
+      const select = document.getElementById('teacherFilter');
+      const currentVal = select.value;
+      const teachers = Array.from(new Set(rows.map(r => r.teacher)));
+      select.innerHTML = `<option value="ALL">Tutti i docenti (${teachers.length})</option>` +
+        teachers.map(t => `<option value="${escapeHtml(t)}">${escapeHtml(t)}</option>`).join('');
+      if (teachers.includes(currentVal)) {
+        select.value = currentVal;
+      }
+    }
+
+    function setTableFilter(filter, btnEl) {
+      currentFilter = filter;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btnEl.classList.add('active');
+      renderTable();
+    }
+
+    function renderTable() {
+      const tbody = document.getElementById('scheduleBody');
+      if (generatedRows.length === 0) return;
+
+      const teacherFilter = document.getElementById('teacherFilter').value;
+
+      const filtered = generatedRows.filter(r => {
+        if (currentFilter !== 'ALL' && r.phase !== currentFilter) return false;
+        if (teacherFilter !== 'ALL' && r.teacher !== teacherFilter) return false;
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="8" style="text-align:center; padding: 28px; color: var(--text-muted);">
+              Nessuna lezione corrisponde ai filtri selezionati.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      let lastDate = null;
+      const htmlRows = filtered.map(r => {
+        const isDayChange = r.dateISO !== lastDate;
+        lastDate = r.dateISO;
+        const trClasses = [
+          isDayChange ? 'new-day-row' : '',
+          r.phase === 'PRATICA' ? 'practice-row' : ''
+        ].filter(Boolean).join(' ');
+
+        const phaseBadge = r.phase === 'TEORIA'
+          ? `<span class="badge badge-teoria">TEORIA</span>`
+          : `<span class="badge badge-pratica">PRATICA</span>`;
+
+        return `
+          <tr class="${trClasses}">
+            <td><strong>${r.dayName}</strong></td>
+            <td style="white-space:nowrap;">${r.dateIT}</td>
+            <td style="white-space:nowrap; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-weight:600;">
+              ${r.startTime} - ${r.endTime}
+            </td>
+            <td><span class="badge badge-durata">${formatDuration(r.durationHours)}</span></td>
+            <td>
+              ${phaseBadge}
+              <div style="font-weight:600; margin-top:3px; color:#1e293b;">${escapeHtml(r.area)}</div>
+            </td>
+            <td>
+              <strong style="color:var(--primary);">${escapeHtml(r.code)}:</strong>
+              ${escapeHtml(r.topic)}
+            </td>
+            <td>${escapeHtml(r.teacher)}</td>
+            <td class="prog-hours">${formatDuration(r.cumulativeHours)}</td>
+          </tr>
+        `;
+      });
+
+      tbody.innerHTML = htmlRows.join('');
+    }
+
+    /* =========================================================================
+       8. ESPORTAZIONE CSV COMPATIBILE EXCEL (UTF-8 CON BOM E SEPARATORE ';')
+       ========================================================================= */
+    function exportCSV() {
+      if (generatedRows.length === 0) return;
+
+      const headers = [
+        'Giorno',
+        'Data',
+        'Fascia Oraria (Dalle - Alle)',
+        'Durata Blocco',
+        'Area / Modulo',
+        'Punto Programma e Argomento',
+        'Docente',
+        'Monte Ore Progressivo'
+      ];
+
+      const csvLines = [headers.join(';')];
+
+      generatedRows.forEach(r => {
+        const rowFields = [
+          r.dayName,
+          r.dateIT,
+          `${r.startTime} - ${r.endTime}`,
+          formatDuration(r.durationHours).replace('.', ','),
+          `[${r.phase}] ${r.area}`,
+          `${r.code} - ${r.topic}`,
+          r.teacher,
+          formatDuration(r.cumulativeHours).replace('.', ',')
+        ].map(val => `"${String(val).replace(/"/g, '""')}"`);
+
+        csvLines.push(rowFields.join(';'));
+      });
+
+      const csvContent = '\uFEFF' + csvLines.join('\r\n');
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+
+      const courseType = document.getElementById('courseType').value.toUpperCase();
+      const indirizzo = document.querySelector('input[name="indirizzo"]:checked').value.toUpperCase();
+      const startDate = document.getElementById('startDate').value;
+
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `Calendario_CQC_${courseType}_${indirizzo}_${startDate}.csv`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }
+
+    /* =========================================================================
+       9. UTILITY DI FORMATTAZIONE DATA E ORA
+       ========================================================================= */
+    function timeToMinutes(timeStr) {
+      if (!timeStr || !timeStr.includes(':')) return NaN;
+      const [h, m] = timeStr.split(':').map(Number);
+      return h * 60 + m;
+    }
+
+    function minutesToTime(totalMins) {
+      const h = Math.floor(totalMins / 60);
+      const m = totalMins % 60;
+      return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+    }
+
+    function formatDuration(hours) {
+      const wholeH = Math.floor(hours);
+      const mins = Math.round((hours - wholeH) * 60);
+      if (mins === 0) return `${wholeH}h`;
+      if (wholeH === 0) return `${mins}m`;
+      return `${wholeH}h ${mins}m`;
+    }
+
+    function parseDateISO(isoStr) {
+      const [y, m, d] = isoStr.split('-').map(Number);
+      return new Date(y, m - 1, d);
+    }
+
+    function formatDateISO(dateObj) {
+      const y = dateObj.getFullYear();
+      const m = String(dateObj.getMonth() + 1).padStart(2, '0');
+      const d = String(dateObj.getDate()).padStart(2, '0');
+      return `${y}-${m}-${d}`;
+    }
+
+    function formatDateIT(isoStr) {
+      const [y, m, d] = isoStr.split('-');
+      return `${d}/${m}/${y}`;
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+  </script>
+</body>
+</html>
